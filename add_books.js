@@ -24,10 +24,17 @@ const showBooks = (array) => {
   listSection.appendChild(listDiv);
   const listUl = createNode('ul', 'list-ul list-group');
   listSection.appendChild(listUl);
+  
   array.forEach((book) => {
     const listItem = createNode('li', 'list-group-item');
     listUl.appendChild(listItem);
-    listItem.innerHTML = `${book.title} - ${book.author}`;
+    listItem.innerHTML = `${book.title} <br> ${book.author}`;
+    const listbutton = createNode('button','list-button')
+    listbutton.innerHTML="Remove"
+    listbutton.setAttribute('class','buttonsize')
+    const listhr = createNode('hr')
+    listUl.appendChild(listhr)
+    listUl.appendChild(listbutton)
   });
 };
 

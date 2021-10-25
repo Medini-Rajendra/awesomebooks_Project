@@ -1,6 +1,16 @@
 let booksList = [];
 const listSection = document.getElementById('list-section');
 
+function addTitleAuthor() {
+    const addTitle=document.getElementById('title').value;
+    const addAuthor=document.getElementById('author').value;
+    createBook(addTitle,addAuthor);
+    const listContainer = document.querySelector('#list-section');
+    const oldList = document.querySelector('.list-div');
+    listContainer.removeChild(oldList);
+    showBooks(booksList);
+}
+
 // Helper functions
 function createBook(title, author) {
   let addObject = { title, author };

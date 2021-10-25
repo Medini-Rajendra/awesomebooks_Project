@@ -31,6 +31,12 @@ const showBooks = (array) => {
   });
 };
 
+ const removeBook = () => {
+    booksList.pop()
+    const findulitem=document.querySelector('.list-ul')
+    findulitem.lastChild.remove()
+ }
+
 createBook('abc', 'def');
 createBook('123', '456');
 showBooks(booksList);

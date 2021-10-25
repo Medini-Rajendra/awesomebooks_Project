@@ -9,9 +9,10 @@ function addTitleAuthor() {
     const oldList = document.querySelector('.list-div');
     listContainer.removeChild(oldList);
     showBooks(booksList);
+    document.getElementById('title').value="";
+    document.getElementById('author').value="";
 }
 
-// Helper functions
 function createBook(title, author) {
   let addObject = { title, author };
   booksList.push(addObject);

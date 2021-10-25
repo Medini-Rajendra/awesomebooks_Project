@@ -3,7 +3,7 @@ const listSection = document.getElementById('list-section');
 
 // Helper functions
 function createBook(title, author) {
-  let addObject = { title, author };
+  const addObject = { title, author };
   booksList.push(addObject);
 }
 
@@ -34,7 +34,7 @@ const showBooks = (array) => {
     listButton.innerHTML = 'Remove';
     listButton.setAttribute('class', 'buttonsize');
     listButton.id = `button-${array.indexOf(book)}`;
-    let bookIndex = `${array.indexOf(book)}`;
+    const bookIndex = `${array.indexOf(book)}`;
     listButton.setAttribute('onclick', `removeBook(${bookIndex})`);
     const listhr = createNode('hr');
     listEntry.appendChild(listhr);
@@ -65,3 +65,4 @@ const removeBook = (bookIndex) => {
   showBooks(booksList);
 };
 showBooks(booksList);
+module.exports = { addTitleAuthor, removeBook };

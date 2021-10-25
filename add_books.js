@@ -1,18 +1,7 @@
-let booksList = [];
+let booksList = JSON.parse(localStorage.getItem('list'));
 const listSection = document.getElementById('list-section');
 
-function addTitleAuthor() {
-    const addTitle=document.getElementById('title').value;
-    const addAuthor=document.getElementById('author').value;
-    createBook(addTitle,addAuthor);
-    const listContainer = document.querySelector('#list-section');
-    const oldList = document.querySelector('.list-div');
-    listContainer.removeChild(oldList);
-    showBooks(booksList);
-    document.getElementById('title').value="";
-    document.getElementById('author').value="";
-}
-
+// Helper functions
 function createBook(title, author) {
   let addObject = { title, author };
   booksList.push(addObject);
@@ -46,12 +35,24 @@ const showBooks = (array) => {
     listButton.setAttribute('class', 'buttonsize');
     listButton.id = `button-${array.indexOf(book)}`;
     let bookIndex = `${array.indexOf(book)}`;
-    console.log(bookIndex);
     listButton.setAttribute('onclick', `removeBook(${bookIndex})`);
     const listhr = createNode('hr');
     listEntry.appendChild(listhr);
   });
 };
+
+function addTitleAuthor() {
+  const addTitle = document.getElementById('title').value;
+  const addAuthor = document.getElementById('author').value;
+  createBook(addTitle, addAuthor);
+  const listContainer = document.querySelector('#list-section');
+  const oldList = document.querySelector('.list-div');
+  listContainer.removeChild(oldList);
+  localStorage.setItem('list', JSON.stringify(booksList));
+  showBooks(booksList);
+  document.getElementById('title').value = '';
+  document.getElementById('author').value = '';
+}
 
 const removeBook = (bookIndex) => {
   const findBook = document.querySelector(`#book-${bookIndex}`);
@@ -60,10 +61,7 @@ const removeBook = (bookIndex) => {
   const listContainer = document.querySelector('#list-section');
   const oldList = document.querySelector('.list-div');
   listContainer.removeChild(oldList);
-  console.log(booksList);
+  localStorage.setItem('list', JSON.stringify(booksList));
   showBooks(booksList);
 };
-
-createBook('abc', 'def');
-createBook('123', '456');
 showBooks(booksList);

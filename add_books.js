@@ -22,27 +22,36 @@ const createNode = (type, nodeClass) => {
 const showBooks = (array) => {
   const listDiv = createNode('div', 'list-div');
   listSection.appendChild(listDiv);
-  const listUl = createNode('ul', 'list-ul list-group');
-  listSection.appendChild(listUl);
-  
   array.forEach((book) => {
-    const listItem = createNode('li', 'list-group-item');
-    listUl.appendChild(listItem);
+    const listEntry = createNode('div');
+    listDiv.appendChild(listEntry);
+    listEntry.id = `book-${array.indexOf(book)}`;
+    const listItem = createNode('p', '');
+    listEntry.appendChild(listItem);
     listItem.innerHTML = `${book.title} <br> ${book.author}`;
-    const listbutton = createNode('button','list-button')
-    listbutton.innerHTML="Remove"
-    listbutton.setAttribute('class','buttonsize')
-    const listhr = createNode('hr')
-    listUl.appendChild(listhr)
-    listUl.appendChild(listbutton)
+    const listButton = createNode('button', 'list-button');
+    listEntry.appendChild(listButton);
+    listButton.innerHTML = 'Remove';
+    listButton.setAttribute('class', 'buttonsize');
+    listButton.id = `button-${array.indexOf(book)}`;
+    let bookIndex = `${array.indexOf(book)}`;
+    console.log(bookIndex);
+    listButton.setAttribute('onclick', `removeBook(${bookIndex})`);
+    const listhr = createNode('hr');
+    listEntry.appendChild(listhr);
   });
 };
 
- const removeBook = () => {
-    booksList.pop()
-    const findulitem=document.querySelector('.list-ul')
-    findulitem.lastChild.remove()
- }
+const removeBook = (bookIndex) => {
+  const findBook = document.querySelector(`#book-${bookIndex}`);
+  deleteBook(booksList[bookIndex].title, booksList[bookIndex].author);
+  findBook.remove();
+  const listContainer = document.querySelector('#list-section');
+  const oldList = document.querySelector('.list-div');
+  listContainer.removeChild(oldList);
+  console.log(booksList);
+  showBooks(booksList);
+};
 
 createBook('abc', 'def');
 createBook('123', '456');

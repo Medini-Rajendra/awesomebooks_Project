@@ -13,20 +13,23 @@
 </head>
 
 <body>
-    <h1>Awesome books</h1>
-    <section id="list-section">
-    </section>
-    <section>
-        <div>
-            <input type="text" name="titletext" id="title" placeholder="Title">
-            <input type="text" name="authortext" id="author" placeholder="Author">
+    <section class="container mt-4">
+      <h1 class="py-2">Awesome books</h1>
+      <div id="list">
+      </div>
+      <form id="book-form">
+        <div class="form-group">
+          <input type="text" name="titletext" id="title" placeholder="Title" class="form-control my-2">
+          <input type="text" name="authortext" id="author" placeholder="Author" class="form-control my-2">
         </div>
-        <button id="addbutton" onclick="addTitleAuthor()">Add</button>
+        <input type="submit" name="add-book" id="add-book" value="Add Book" class="btn btn-primary btn-block">
+      </form>
     </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-        </script>
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+      </script>
     <script src="add_books.js"></script>
-</body>
+  </body>
 
 </html>

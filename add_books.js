@@ -1,10 +1,4 @@
 // Helper function
-const createNode = (type, nodeClass) => {
-  const node = document.createElement(type);
-  if (nodeClass) node.className = nodeClass;
-  return node;
-};
-
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -13,24 +7,29 @@ class Book {
 }
 
 class bookList {
-  static showBooks() {
+  static createNode = (type, nodeClass) => {
+    const node = document.createElement(type);
+    if (nodeClass) node.className = nodeClass;
+    return node;
+  };
+  static showBooks = () => {
     const books = Save.getBooks();
     books.forEach((book) => bookList.addBook(book));
   }
-  static addBook(book) {
+  static addBook = (book) => {
     const list = document.getElementById('list');
-    const entry = createNode('div', `book`);
+    const entry = bookList.createNode('div', `book`);
 
     entry.innerHTML = `
-    <p class="${book.title}" id="${book.author}"> ${book.title} - ${book.author} <a ref="" class="btn btn-danger btn-sm delete">X</a> </p>
+    <p class="${book.title}" id="${book.author}"> ${book.title} <br> ${book.author} <br><a ref="" class="btn btn-danger btn-sm delete">Remove</a> </p><hr>
     `;
     list.appendChild(entry);
   }
-  static clearFields() {
+  static clearFields = () => {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
   }
-  static deleteBook(el) {
+  static deleteBook = (el) => {
     if (el.classList.contains('delete')) {
       el.parentElement.parentElement.remove();
     }
@@ -38,7 +37,7 @@ class bookList {
 }
 
 class Save {
-  static getBooks() {
+  static getBooks = () => {
     let books;
     if (localStorage.getItem('list') === null) {
       books = [];
@@ -47,13 +46,13 @@ class Save {
     }
     return books;
   }
-  static addBook(book) {
+  static addBook = (book) => {
     let books = Save.getBooks();
     let newBook = [book];
     books = books.concat(newBook);
     localStorage.setItem('list', JSON.stringify(books));
   }
-  static removeBook(title, author) {
+  static removeBook = (title, author) => {
     let books = Save.getBooks();
     books = books.filter(
       (book) => book.title !== title && book.author !== author,

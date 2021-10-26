@@ -59,7 +59,6 @@ const addTitleAuthor = () => {
   const oldList = document.querySelector('.list-div');
   listContainer.removeChild(oldList);
   localStorage.setItem('list', JSON.stringify(booksList));
-  console.log(JSON.stringify(booksList));
   showBooks(booksList);
   document.getElementById('title').value = '';
   document.getElementById('author').value = '';
@@ -76,4 +75,10 @@ const removeBook = (bookIndex) => {
   showBooks(booksList);
 };
 showBooks(booksList);
-module.exports = { addTitleAuthor, removeBook };
+module.exports = { 
+    addTitleAuthor, 
+    removeBook,
+    rules:{
+        "linebreak-style": 0
+    },
+};

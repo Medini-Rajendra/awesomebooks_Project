@@ -15,7 +15,7 @@ class bookList {
   static showBooks = () => {
     const books = Save.getBooks();
     books.forEach((book) => bookList.addBook(book));
-  }
+  };
   static addBook = (book) => {
     const list = document.getElementById('list');
     const entry = bookList.createNode('div', `book`);
@@ -24,16 +24,16 @@ class bookList {
     <p class="${book.title}" id="${book.author}"> ${book.title} <br> ${book.author} <br><a ref="" class="btn btn-danger btn-sm delete">Remove</a> </p><hr>
     `;
     list.appendChild(entry);
-  }
+  };
   static clearFields = () => {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
-  }
+  };
   static deleteBook = (el) => {
     if (el.classList.contains('delete')) {
       el.parentElement.parentElement.remove();
     }
-  }
+  };
 }
 
 class Save {
@@ -45,20 +45,20 @@ class Save {
       books = JSON.parse(localStorage.getItem('list'));
     }
     return books;
-  }
+  };
   static addBook = (book) => {
     let books = Save.getBooks();
     let newBook = [book];
     books = books.concat(newBook);
     localStorage.setItem('list', JSON.stringify(books));
-  }
+  };
   static removeBook = (title, author) => {
     let books = Save.getBooks();
     books = books.filter(
       (book) => book.title !== title && book.author !== author,
     );
     localStorage.setItem('list', JSON.stringify(books));
-  }
+  };
 }
 
 // Show books

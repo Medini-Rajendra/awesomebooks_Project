@@ -1,17 +1,27 @@
-let booksList = JSON.parse(localStorage.getItem('list'));
 const listSection = document.getElementById('list-section');
 
 // Helper functions
-function createBook(title, author) {
-  const addObject = { title, author };
-  booksList.push(addObject);
-}
+const getBook = () => {
+  let result;
+  if (localStorage.getItem('list') === null) {
+    result = [];
+  } else {
+    result = JSON.parse(localStorage.getItem('list'));
+  }
+  return result;
+};
+let booksList = getBook();
 
-function deleteBook(title, author) {
+const createBook = (title, author) => {
+  const addObject = [{ title, author }];
+  booksList = booksList.concat(addObject);
+};
+
+const deleteBook = (title, author) => {
   booksList = booksList.filter(
     (book) => book.title !== title && book.author !== author,
   );
-}
+};
 
 const createNode = (type, nodeClass) => {
   const node = document.createElement(type);
@@ -41,7 +51,7 @@ const showBooks = (array) => {
   });
 };
 
-function addTitleAuthor() {
+const addTitleAuthor = () => {
   const addTitle = document.getElementById('title').value;
   const addAuthor = document.getElementById('author').value;
   createBook(addTitle, addAuthor);
@@ -49,10 +59,11 @@ function addTitleAuthor() {
   const oldList = document.querySelector('.list-div');
   listContainer.removeChild(oldList);
   localStorage.setItem('list', JSON.stringify(booksList));
+  console.log(JSON.stringify(booksList));
   showBooks(booksList);
   document.getElementById('title').value = '';
   document.getElementById('author').value = '';
-}
+};
 
 const removeBook = (bookIndex) => {
   const findBook = document.querySelector(`#book-${bookIndex}`);

@@ -75,10 +75,10 @@ const removeBook = (bookIndex) => {
   showBooks(booksList);
 };
 showBooks(booksList);
-module.exports = { 
-    addTitleAuthor, 
-    removeBook,
-    rules:{
-        "linebreak-style": 0
-    },
+module.exports = {
+  addTitleAuthor,
+  removeBook,
+  rules: {
+    'linebreak-style': 0,
+  },
 };

@@ -1,6 +1,3 @@
-// Helper function
-// Show books
-
 class BookList {
   constructor(title, author) {
     this.title = title;

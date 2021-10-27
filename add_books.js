@@ -2,7 +2,15 @@ class BookList {
   constructor(title, author) {
     this.title = title;
     this.author = author;
+    this.id = BookList.uniqueId();
+    console.log(this.id)
   }
+
+  static uniqueId = () => {
+    const dateString = Date.now().toString(36);
+    const randomness = Math.random().toString(36).substr(2);
+    return dateString + randomness;
+  };
 
   static createNode = (type, nodeClass) => {
     const node = document.createElement(type);
@@ -20,7 +28,7 @@ class BookList {
     const entry = BookList.createNode('div', 'book');
 
     entry.innerHTML = `
-    <p class="${book.title}" id="${book.author}"> ${book.title} <br> ${book.author} <br><a ref="" class="btn btn-danger btn-sm delete">Remove</a> </p><hr>
+    <p class="" id="${book.id}"> ${book.title} <br> ${book.author} <br><a ref="" class="btn btn-danger btn-sm delete">Remove</a> </p><hr>
     `;
     list.appendChild(entry);
   }
@@ -38,17 +46,17 @@ class BookList {
 
   static getBooks = () => JSON.parse(localStorage.getItem('list')) || []
 
-  static addBook1 = (book) => {
+  static saveBook = (book) => {
     let books = BookList.getBooks();
     const newBook = [book];
     books = books.concat(newBook);
     localStorage.setItem('list', JSON.stringify(books));
   }
 
-  static removeBook = (title, author) => {
+  static removeBook = (id) => {
     let books = BookList.getBooks();
     books = books.filter(
-      (book) => book.title !== title && book.author !== author,
+      (book) => book.id !== id,
     );
     localStorage.setItem('list', JSON.stringify(books));
   }
@@ -68,9 +76,10 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   if (title === '' || author === '') {
     alert('Please fill in all fields');
   } else {
-    const book = new BookList(title, author);
+    const isbn = Math.random().toString();
+    const book = new BookList(title, author, isbn);
     BookList.addBook(book);
-    BookList.addBook1(book);
+    BookList.saveBook(book);
     BookList.clearFields();
   }
 });
@@ -78,5 +87,5 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 // Remove Book
 document.querySelector('#list').addEventListener('click', (e) => {
   BookList.deleteBook(e.target);
-  BookList.removeBook(e.target.parentElement.class, e.target.parentElement.id);
+  BookList.removeBook(e.target.parentElement.id);
 });

@@ -3,7 +3,6 @@ class BookList {
     this.title = title;
     this.author = author;
     this.id = BookList.uniqueId();
-    console.log(this.id);
   }
 
   static uniqueId = () => {
@@ -20,15 +19,14 @@ class BookList {
 
   static showBooks = () => {
     const books = BookList.getBooks();
-    books.forEach((book) => BookList.addBook(book));
+    books.forEach((book) => BookList.addBook(book, books.indexOf(book)));
   };
 
-  static addBook = (book) => {
+  static addBook = (book, id) => {
     const list = document.getElementById('list');
     const entry = BookList.createNode('div', 'book');
-
     entry.innerHTML = `
-    <p class="" id="${book.id}"> ${book.title} <br> ${book.author} <br><a ref="" class="btn btn-danger btn-sm delete">Remove</a> </p><hr>
+    <p class="w-100 d-flex justify-content-between p-2 m-0" id="${book.id}"> ${book.title} by ${book.author} <a ref="" class="btn btn-danger btn-sm delete">Remove</a> </p>
     `;
     list.appendChild(entry);
   };
@@ -74,8 +72,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   if (title === '' || author === '') {
     alert('Please fill in all fields');
   } else {
-    const isbn = Math.random().toString();
-    const book = new BookList(title, author, isbn);
+    const book = new BookList(title, author);
     BookList.addBook(book);
     BookList.saveBook(book);
     BookList.clearFields();

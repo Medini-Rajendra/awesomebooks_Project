@@ -1,3 +1,26 @@
 .buttonsize {
   width: 20%;
 }
+
+.bg-odd {
+  background-color: lightblue;
+}
+
+#list {
+  border: 3px solid black;
+}
+
+.divider {
+  width: 4rem;
+  padding: 0.1rem 0;
+  background-color: black;
+  opacity: 100%;
+}
+
+div:nth-child(even) {
+  background-color: lightblue;
+}
+
+div:nth-child(odd) {
+  background-color: white;
+}

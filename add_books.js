@@ -19,10 +19,10 @@ class BookList {
 
   static showBooks = () => {
     const books = BookList.getBooks();
-    books.forEach((book) => BookList.addBook(book, books.indexOf(book)));
+    books.forEach((book) => BookList.addBook(book));
   };
 
-  static addBook = (book, id) => {
+  static addBook = (book) => {
     const list = document.getElementById('list');
     const entry = BookList.createNode('div', 'book');
     entry.innerHTML = `

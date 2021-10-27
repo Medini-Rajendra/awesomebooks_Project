@@ -3,7 +3,7 @@ class BookList {
     this.title = title;
     this.author = author;
     this.id = BookList.uniqueId();
-    console.log(this.id)
+    console.log(this.id);
   }
 
   static uniqueId = () => {
@@ -21,7 +21,7 @@ class BookList {
   static showBooks = () => {
     const books = BookList.getBooks();
     books.forEach((book) => BookList.addBook(book));
-  }
+  };
 
   static addBook = (book) => {
     const list = document.getElementById('list');
@@ -31,35 +31,33 @@ class BookList {
     <p class="" id="${book.id}"> ${book.title} <br> ${book.author} <br><a ref="" class="btn btn-danger btn-sm delete">Remove</a> </p><hr>
     `;
     list.appendChild(entry);
-  }
+  };
 
   static clearFields = () => {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
-  }
+  };
 
   static deleteBook = (el) => {
     if (el.classList.contains('delete')) {
       el.parentElement.parentElement.remove();
     }
-  }
+  };
 
-  static getBooks = () => JSON.parse(localStorage.getItem('list')) || []
+  static getBooks = () => JSON.parse(localStorage.getItem('list')) || [];
 
   static saveBook = (book) => {
     let books = BookList.getBooks();
     const newBook = [book];
     books = books.concat(newBook);
     localStorage.setItem('list', JSON.stringify(books));
-  }
+  };
 
   static removeBook = (id) => {
     let books = BookList.getBooks();
-    books = books.filter(
-      (book) => book.id !== id,
-    );
+    books = books.filter((book) => book.id !== id);
     localStorage.setItem('list', JSON.stringify(books));
-  }
+  };
 }
 
 document.addEventListener('DOMContentLoaded', BookList.showBooks);

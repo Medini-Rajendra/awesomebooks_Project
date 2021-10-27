@@ -24,7 +24,7 @@ To get a local copy up and running follow these simple steps.
 - Having a modern internet browser: I.E. Chrome, Edge, Safari, Firefox.
 
 ### Setup
-- Go into the main page for this project: https://github.com/lu-jim/capstone-01
+- Go into the main page for this project: https://github.com/Medini-Rajendra/AwesomeBooks_Project/
 - Click the green Code button next to the About section.
 - Select the then click the 📋 button.
 ### Install

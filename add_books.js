@@ -36,15 +36,7 @@ class BookList {
     }
   }
 
-  static getBooks = () => {
-    let books;
-    if (localStorage.getItem('list') === null) {
-      books = [];
-    } else {
-      books = JSON.parse(localStorage.getItem('list'));
-    }
-    return books;
-  }
+  static getBooks = () => JSON.parse(localStorage.getItem('list')) || []
 
   static addBook1 = (book) => {
     let books = BookList.getBooks();
@@ -65,6 +57,7 @@ class BookList {
 document.addEventListener('DOMContentLoaded', BookList.showBooks);
 
 // Add Book
+
 document.querySelector('#book-form').addEventListener('submit', (e) => {
   e.preventDefault();
 

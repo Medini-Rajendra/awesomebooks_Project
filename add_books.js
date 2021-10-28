@@ -93,11 +93,9 @@ class BookList {
     books = books.concat(newBook);
     localStorage.setItem('list', JSON.stringify(books));
   };
-  static removeBook(title, author) {
+  static removeBook(id) {
     let books = BookList.getBooks();
-    books = books.filter(
-      (book) => book.title !== title && book.author !== author,
-    );
+    books = books.filter((book) => book.id !== id);
     localStorage.setItem('list', JSON.stringify(books));
   }
 }
@@ -127,5 +125,5 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 // Remove Book
 document.querySelector('#list').addEventListener('click', (e) => {
   BookList.deleteBook(e.target);
-  BookList.removeBook(e.target.parentElement.class, e.target.parentElement.id);
+  BookList.removeBook(e.target.parentElement.id);
 });

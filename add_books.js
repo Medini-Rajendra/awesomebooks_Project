@@ -14,9 +14,9 @@ const showTime = () => {
 function getContent(fragmentId) {
   // Assign the visibility for each dynamic element of the page
   let pages = {
-    booklist: ['d-flex flex-column container mt-4 p-0', 'd-none', 'd-none'],
-    add: ['d-none', 'd-flex flex-column container mt-4 p-0', 'd-none'],
-    contact: ['d-none', 'd-none', 'd-flex flex-column container mt-4 p-0'],
+    booklist: ['d-flex flex-column container mt-4 p-0', 'd-none', 'd-none', 'nav-link text-primary', 'nav-link text-dark', 'nav-link text-dark'],
+    add: ['d-none', 'd-flex flex-column container mt-4 p-0', 'd-none', 'nav-link text-dark', 'nav-link text-primary', 'nav-link text-dark'],
+    contact: ['d-none', 'd-none', 'd-flex flex-column container mt-4 p-0', 'nav-link text-dark', 'nav-link text-dark', 'nav-link text-primary'],
   };
   // look up what fragment you are searching for in the object
   return pages[fragmentId];
@@ -26,10 +26,15 @@ function loadContent() {
   const listSection = document.getElementById('booklist'),
     addSection = document.getElementById('add'),
     contactSection = document.getElementById('contact'),
+    colorListItem = document.getElementById('list-identifier'),
+    colorAddItem = document.getElementById('add-identifier'),
+    colorContactItem = document.getElementById('contact-identifier'),
     fragmentId = location.hash.substr(1);
   const sectionArray = [listSection, addSection, contactSection];
+  const colorArray = [colorListItem, colorAddItem, colorContactItem];
   for (let i = 0; i < 3; i += 1) {
     sectionArray[i].setAttribute('class', getContent(fragmentId)[i]);
+    colorArray[i].setAttribute('class', getContent(fragmentId)[i+3]);
   }
 }
 // Changes default homepage to use hashes as would happen when clicking the booklist nav item

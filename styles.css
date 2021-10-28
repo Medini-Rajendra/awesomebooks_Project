@@ -29,3 +29,12 @@ h1, h2, h3 {
 .book:nth-child(odd) {
   background-color: white;
 }
+
+.navbar-nav>li{
+  padding-right: 2%;
+  border-right: 1px solid #000;
+}
+
+.navbar-nav > li:last-child {
+  border-right: none;
+}

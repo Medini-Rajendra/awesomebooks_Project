@@ -1,22 +1,45 @@
 'use strict';
 let DateTime = luxon.DateTime;
 let now = DateTime.now();
-let atm = DateTime.now.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS );
+let atm = DateTime.now.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
 let clockSection = document.getElementById('clock');
 let clockDisplay = clockSection.firstChild;
 
 const showTime = () => {
   now = DateTime.now();
-  clockSection.innerHTML = (now.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS ));
+  clockSection.innerHTML = now.toLocaleString(
+    DateTime.DATETIME_MED_WITH_SECONDS,
+  );
   setTimeout(showTime, 1000);
-}
+};
 
 function getContent(fragmentId) {
   // Assign the visibility for each dynamic element of the page
   let pages = {
-    booklist: ['d-flex flex-column container mt-4 p-0', 'd-none', 'd-none', 'nav-link text-primary', 'nav-link text-dark', 'nav-link text-dark'],
-    add: ['d-none', 'd-flex flex-column container mt-4 p-0', 'd-none', 'nav-link text-dark', 'nav-link text-primary', 'nav-link text-dark'],
-    contact: ['d-none', 'd-none', 'd-flex flex-column container mt-4 p-0', 'nav-link text-dark', 'nav-link text-dark', 'nav-link text-primary'],
+    booklist: [
+      'd-flex flex-column container mt-4 p-0',
+      'd-none',
+      'd-none',
+      'nav-link text-primary',
+      'nav-link text-dark',
+      'nav-link text-dark',
+    ],
+    add: [
+      'd-none',
+      'd-flex flex-column container mt-4 p-0',
+      'd-none',
+      'nav-link text-dark',
+      'nav-link text-primary',
+      'nav-link text-dark',
+    ],
+    contact: [
+      'd-none',
+      'd-none',
+      'd-flex flex-column container mt-4 p-0',
+      'nav-link text-dark',
+      'nav-link text-dark',
+      'nav-link text-primary',
+    ],
   };
   // look up what fragment you are searching for in the object
   return pages[fragmentId];
@@ -34,7 +57,7 @@ function loadContent() {
   const colorArray = [colorListItem, colorAddItem, colorContactItem];
   for (let i = 0; i < 3; i += 1) {
     sectionArray[i].setAttribute('class', getContent(fragmentId)[i]);
-    colorArray[i].setAttribute('class', getContent(fragmentId)[i+3]);
+    colorArray[i].setAttribute('class', getContent(fragmentId)[i + 3]);
   }
 }
 // Changes default homepage to use hashes as would happen when clicking the booklist nav item

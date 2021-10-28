@@ -1,9 +1,6 @@
-'use strict';
-let DateTime = luxon.DateTime;
+const { DateTime } = window.luxon;
 let now = DateTime.now();
-let atm = DateTime.now.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
-let clockSection = document.getElementById('clock');
-let clockDisplay = clockSection.firstChild;
+const clockSection = document.getElementById('clock');
 
 const showTime = () => {
   now = DateTime.now();
@@ -15,7 +12,7 @@ const showTime = () => {
 
 function getContent(fragmentId) {
   // Assign the visibility for each dynamic element of the page
-  let pages = {
+  const pages = {
     booklist: [
       'd-flex flex-column container mt-4 p-0',
       'd-none',
@@ -46,13 +43,13 @@ function getContent(fragmentId) {
 }
 // Matches each section of the site with the respective visibility status (show/hide)
 function loadContent() {
-  const listSection = document.getElementById('booklist'),
-    addSection = document.getElementById('add'),
-    contactSection = document.getElementById('contact'),
-    colorListItem = document.getElementById('list-identifier'),
-    colorAddItem = document.getElementById('add-identifier'),
-    colorContactItem = document.getElementById('contact-identifier'),
-    fragmentId = location.hash.substr(1);
+  const listSection = document.getElementById('booklist');
+  const addSection = document.getElementById('add');
+  const contactSection = document.getElementById('contact');
+  const colorListItem = document.getElementById('list-identifier');
+  const colorAddItem = document.getElementById('add-identifier');
+  const colorContactItem = document.getElementById('contact-identifier');
+  const fragmentId = window.location.hash.substr(1);
   const sectionArray = [listSection, addSection, contactSection];
   const colorArray = [colorListItem, colorAddItem, colorContactItem];
   for (let i = 0; i < 3; i += 1) {
@@ -61,8 +58,8 @@ function loadContent() {
   }
 }
 // Changes default homepage to use hashes as would happen when clicking the booklist nav item
-if (!location.hash) {
-  location.hash = '#booklist';
+if (!window.location.hash) {
+  window.location.hash = '#booklist';
 }
 loadContent();
 // Checks the current location through the hash
@@ -76,46 +73,53 @@ class BookList {
     this.author = author;
     this.id = BookList.uniqueId();
   }
+
   static uniqueId = () => {
     const dateString = Date.now().toString(36);
     const randomness = Math.random().toString(36).substr(2);
     return dateString + randomness;
   };
+
   static createNode = (type, nodeClass) => {
     const node = document.createElement(type);
     if (nodeClass) node.className = nodeClass;
     return node;
   };
+
   static showBooks() {
     const books = BookList.getBooks();
     books.forEach((book) => BookList.addBook(book));
   }
+
   static addBook(book) {
     const list = document.getElementById('list');
-    const entry = BookList.createNode('div', `book`);
+    const entry = BookList.createNode('div', 'book');
     entry.innerHTML = `
     <p class="w-100 d-flex justify-content-between p-2 m-0" id="${book.id}"> ${book.title} by ${book.author} <a ref="" class="btn btn-danger btn-sm delete">Remove</a> </p>
     `;
     list.appendChild(entry);
   }
+
   static clearFields() {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
   }
+
   static deleteBook(el) {
     if (el.classList.contains('delete')) {
       el.parentElement.parentElement.remove();
     }
   }
-  static getBooks = () => {
-    return JSON.parse(localStorage.getItem('list')) || [];
-  };
+
+  static getBooks = () => JSON.parse(localStorage.getItem('list')) || [];
+
   static saveBook = (book) => {
     let books = BookList.getBooks();
-    let newBook = [book];
+    const newBook = [book];
     books = books.concat(newBook);
     localStorage.setItem('list', JSON.stringify(books));
   };
+
   static removeBook(id) {
     let books = BookList.getBooks();
     books = books.filter((book) => book.id !== id);
@@ -134,7 +138,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
   const title = document.querySelector('#title').value;
   const author = document.querySelector('#author').value;
 
-  //Validate
+  // Validate
   if (title === '' || author === '') {
     alert('Please fill in all fields');
   } else {

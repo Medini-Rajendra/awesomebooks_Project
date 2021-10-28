@@ -2,10 +2,6 @@
   width: 20%;
 }
 
-.bg-odd {
-  background-color: lightblue;
-}
-
 #list {
   border: 3px solid black;
 }
@@ -17,10 +13,10 @@
   opacity: 100%;
 }
 
-div:nth-child(even) {
+.book:nth-child(even) {
   background-color: lightblue;
 }
 
-div:nth-child(odd) {
+.book:nth-child(odd) {
   background-color: white;
 }

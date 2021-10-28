@@ -23,24 +23,24 @@
         <li class="nav-item mx-lg-2 mx-xl-3 mx-xxl-4">
           <a class="nav-link" href="#add">Add new</a>
         </li>
-        <li class="nav-item mx-lg-2 mx-xl-3 mx-xxl-4">
+        <li class="nav-item ml-lg-2 ml-xl-3 ml-xxl-4">
           <a class="nav-link" href="#contact">Contact</a>
         </li>
       </ul>
     </div>
   </nav>
-  <div id="app"></div>
-  <section class="container mt-4" id="booklist">
+  <section class="container d-flex justify-content-end" id="clock">
+    <p></p>
+  </section>
+  <section class="container mt-4 d-none" id="booklist">
+    <h1 class="text-center py-2 mb-4">All Awesome Books</h1>
     <div id="list">
     </div>
     <div>
-      <div class="w-100 d-flex justify-content-center mt-4 mb-2">
-        <hr class="divider">
-      </div>
   </section>
 
-  <section id="add">
-    <h1 class="text-center mb-4">Add a new book</h1>
+  <section id="add" class="d-none">
+    <h1 class="text-center py-2 mb-4">Add a new book</h1>
     <div class="flex-container d-flex row w-100 justify-content-center">
       <form id="book-form" class="col-8 d-flex flex-column justify-content-center">
         <div class="form-group">
@@ -53,15 +53,24 @@
     </div>
   </section>
 
-  <section id="contact">
-    <p>Contact me on this page if you have any questions</p>
+  <section id="contact" class="d-none">
+    <h1 class="text-center py-2 mb-4">Contact Information</h1>
+    <p>Do you have any questions or you just want to say "Hello"?</p>
+    <p>You can reach out to us!</p>
+
+    <ul>
+      <li>Our email: mail@mail.com</li>
+      <li>Our phone number: 12341234112344</li>
+      <li>Our address: Streetname 22, 23454, City, Country</li>
+    </ul>
   </section>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
-  <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@2/build/global/luxon.min.js"></script>
+  <script src="add_books.js"></script>
 </body>
 
 </html>

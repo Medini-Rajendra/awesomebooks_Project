@@ -1,18 +1,29 @@
 'use strict';
+let DateTime = luxon.DateTime;
+let now = DateTime.now();
+let atm = DateTime.now.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS );
+let clockSection = document.getElementById('clock');
+let clockDisplay = clockSection.firstChild;
+
+const showTime = () => {
+  now = DateTime.now();
+  clockSection.innerHTML = (now.toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS ));
+  setTimeout(showTime, 1000);
+}
 
 function getContent(fragmentId) {
   // Assign the visibility for each dynamic element of the page
   let pages = {
     booklist: ['d-flex flex-column container mt-4 p-0', 'd-none', 'd-none'],
-    add: ['d-none', 'd-flex', 'd-none'],
-    contact: ['d-none', 'd-none', 'd-flex'],
+    add: ['d-none', 'd-flex flex-column container mt-4 p-0', 'd-none'],
+    contact: ['d-none', 'd-none', 'd-flex flex-column container mt-4 p-0'],
   };
   // look up what fragment you are searching for in the object
   return pages[fragmentId];
 }
 // Matches each section of the site with the respective visibility status (show/hide)
 function loadContent() {
-  const listSection = document.getElementById('list'),
+  const listSection = document.getElementById('booklist'),
     addSection = document.getElementById('add'),
     contactSection = document.getElementById('contact'),
     fragmentId = location.hash.substr(1);
@@ -48,9 +59,6 @@ class BookList {
     return node;
   };
   static showBooks() {
-    const title = BookList.createNode('h1', 'py-2 text-center');
-    title.innerHTML = 'All Awesome Books';
-    list.appendChild(title);
     const books = BookList.getBooks();
     books.forEach((book) => BookList.addBook(book));
   }
@@ -91,6 +99,7 @@ class BookList {
 
 // Show books
 document.addEventListener('DOMContentLoaded', BookList.showBooks);
+showTime();
 
 // Add Book
 document.querySelector('#book-form').addEventListener('submit', (e) => {

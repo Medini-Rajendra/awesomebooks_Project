@@ -10,7 +10,7 @@ const showTime = () => {
   setTimeout(showTime, 1000);
 };
 
-function getContent(fragmentId) {
+const getContent = (fragmentId) => {
   // Assign the visibility for each dynamic element of the page
   const pages = {
     booklist: [
@@ -40,9 +40,9 @@ function getContent(fragmentId) {
   };
   // look up what fragment you are searching for in the object
   return pages[fragmentId];
-}
+};
 // Matches each section of the site with the respective visibility status (show/hide)
-function loadContent() {
+const loadContent = () => {
   const listSection = document.getElementById('booklist');
   const addSection = document.getElementById('add');
   const contactSection = document.getElementById('contact');
@@ -56,7 +56,7 @@ function loadContent() {
     sectionArray[i].setAttribute('class', getContent(fragmentId)[i]);
     colorArray[i].setAttribute('class', getContent(fragmentId)[i + 3]);
   }
-}
+};
 // Changes default homepage to use hashes as would happen when clicking the booklist nav item
 if (!window.location.hash) {
   window.location.hash = '#booklist';
@@ -86,12 +86,12 @@ class BookList {
     return node;
   };
 
-  static showBooks() {
+  static showBooks = () => {
     const books = BookList.getBooks();
     books.forEach((book) => BookList.addBook(book));
   }
 
-  static addBook(book) {
+  static addBook = (book) => {
     const list = document.getElementById('list');
     const entry = BookList.createNode('div', 'book');
     entry.innerHTML = `
@@ -100,12 +100,12 @@ class BookList {
     list.appendChild(entry);
   }
 
-  static clearFields() {
+  static clearFields = () => {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
   }
 
-  static deleteBook(el) {
+  static deleteBook = (el) => {
     if (el.classList.contains('delete')) {
       el.parentElement.parentElement.remove();
     }
@@ -120,7 +120,7 @@ class BookList {
     localStorage.setItem('list', JSON.stringify(books));
   };
 
-  static removeBook(id) {
+  static removeBook = (id) => {
     let books = BookList.getBooks();
     books = books.filter((book) => book.id !== id);
     localStorage.setItem('list', JSON.stringify(books));
